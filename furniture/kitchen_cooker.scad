@@ -49,7 +49,7 @@ module furniture()
 {
     //ezt meg le kell merni
     ySizeOfOven=530;
-    zSizeOfOven=770;
+    zSizeOfOven=870;
     //ez is belerondit az eredeti elkepzelesbe
     yOffsetFromWall=150;
     //530 + 36 + 150 = 716
@@ -64,6 +64,10 @@ module furniture()
     //ebbol le fog jonni a 2 * 18
         sizeOfFrontPanel=711;
   
+    
+    zSizeOfDrawer=100; 
+    zOffsetOfDrawer=zSizeOfDrawer + 18;
+    
     translate([0.0, -(ySizeOfOven + yOffsetFromWall), 0.0])
     {
         
@@ -72,13 +76,21 @@ module furniture()
         color("#db471a") cube([sizeOfDeadArea, 18, zSizeOfOven]);
         translate([sizeOfDeadArea, 0, 0]) 
         {
-            difference() {
-                color("#75443f") cube([sizeOfFrontPanel - sizeOfDeadArea, 18, 752]);
-                translate([18, -2, offsetFromFloor]) color("#152fd4") cube([xSizeOfCooker, 30, zSizeOfCooker]);
+            translate([0, 0, 0]) {
+                 difference() {
+                    color("#75443f") cube([sizeOfFrontPanel - sizeOfDeadArea, 18, zOffsetOfDrawer 
+                     + 752]);
+                    translate([18, -2, offsetFromFloor]) color("#152fd4") cube([xSizeOfCooker, 30, zOffsetOfDrawer + zSizeOfCooker]);
+                }
             }  
+            //Elso alja a butornak, innen kezdodik a fiok rendszer
             translate([18, 0, offsetFromFloor - 18]) color("#68db51") cube([xSizeOfCooker, ySizeOfCooker, 18]);
-            translate([18, 0, offsetFromFloor + zSizeOfCooker]) color("#b054d1") cube([xSizeOfCooker, ySizeOfCooker, 18]);
-            color("#51c9b7")  cube([18, ySizeOfOven, zSizeOfOven]);
+            //Fiok rendszer eleje
+            
+            translate([18, 0, zSizeOfDrawer + offsetFromFloor - 18]) color("#680b51") cube([xSizeOfCooker, ySizeOfCooker, 18]);
+            //Fiok rendszer vege
+            translate([18, 0, offsetFromFloor + zSizeOfCooker + zOffsetOfDrawer]) color("#b054d1") cube([xSizeOfCooker, ySizeOfCooker, 18]);
+                color("#51c9b7")  cube([18, ySizeOfOven, zSizeOfOven]);
             color("#9e2c56") translate([sizeOfFrontPanel - sizeOfDeadArea, 0, 0]) cube([18, ySizeOfOven, zSizeOfOven]);
             translate([0, ySizeOfOven, 0]) cube([100, 18 , zSizeOfOven]);
             translate([xSizeOfCooker - 65, ySizeOfOven, 0]) cube([100, 18 , zSizeOfOven]);
